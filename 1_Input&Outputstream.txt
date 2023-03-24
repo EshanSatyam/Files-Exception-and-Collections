@@ -1,0 +1,136 @@
+Questions 
+
+1.What are the InputStream and OutputStream classes available to deal with Files ?
+
+Ans- Java provides I/O Streams to read and write data where, a Stream represents
+ an input source or an output destination which could be a file, i/o devise, other program etc.
+
+There are two types of streams available −
+
+InputStream − This is used to read (sequential) data from a source.
+OutputStream − This is used to write data to a destination.
+
+
+
+
+1.FileInputStream
+
+This class reads the data from a specific file (byte by byte). It is usually used to read the contents of a file with raw bytes, such as images.
+
+To read the contents of a file using this class −
+
+First of all, you need to instantiate this class by passing a String variable or a File object, representing the path of the file to be read.
+
+
+FileInputStream inputStream = new FileInputStream("file_path");
+or,
+File file = new File("file_path");
+FileInputStream inputStream = new FileInputStream(file);
+Then read the contents of the specified file using either of the variants of read() method −
+int read() − This simply reads data from the current InputStream and returns the read data byte by byte (in integer format).
+
+This method returns -1 if the end of the file is reached.
+
+int read(byte[] b) − This method accepts a byte array as parameter and reads the contents of the current InputStream, to the given array
+
+This method returns an integer representing the total number of bytes or, -1 if the end of the file is reached.
+
+int read(byte[] b, int off, int len) − This method accepts a byte array, its offset (int) and, its length (int) as parameters
+ and reads the contents of the current InputStream, to the given array.
+
+This method returns an integer representing the total number of bytes or, -1 if the end of the file is reached.
+
+Example
+Assume we have the following image in the directory D:/images
+
+
+
+*****Following program reads contents of the above image using the FileInputStream.*****
+
+Example
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+public class FileInputStreamExample {
+   public static void main(String args[]) throws IOException {
+      //Creating a File object
+      File file = new File("D:/images/javafx.jpg");
+      //Creating a FileInputStream object
+      FileInputStream inputStream = new FileInputStream(file);
+      //Creating a byte array
+      byte bytes[] = new byte[(int) file.length()];
+      //Reading data into the byte array
+      int numOfBytes = inputStream.read(bytes);
+      System.out.println("Data copied successfully...");
+   }
+}
+
+Output
+Data copied successfully...
+
+
+
+
+
+2.FileOutputStream
+
+This writes data into a specific file or, file descriptor (byte by byte). 
+It is usually used to write the contents of a file with raw bytes, such as images.
+
+To write the contents of a file using this class −
+
+First of all, you need to instantiate this class by passing a String variable or a File 
+object, representing the path of the file to be read.
+
+
+FileOutputStream outputStream = new FileOutputStream("file_path");
+or,
+File file = new File("file_path");
+FileOutputStream outputStream = new FileOutputStream (file);
+You can also instantiate a FileOutputStream class by passing a FileDescriptor object.
+
+FileDescriptor descriptor = new FileDescriptor();
+FileOutputStream outputStream = new FileOutputStream(descriptor);
+Then write the data to a specified file using either of the variants of write() method −
+int write(int b) − This method accepts a single byte and writes it to the current OutputStream.
+int write(byte[] b) − This method accepts a byte array as parameter and writes data from it to the current OutputStream.
+int write(byte[] b, int off, int len) − This method accepts a byte array, its offset (int) and, its length (int) as parameters and writes its contents to the current OutputStream.
+Example
+Assume we have the following image in the directory D:/images
+
+
+
+*****Following program reads contents of the above image and writes it back to another file using the FileOutputStream class.*****
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+public class FileInputStreamExample {
+   public static void main(String args[]) throws IOException {
+      //Creating a File object
+      File file = new File("D:/images/javafx.jpg");
+      //Creating a FileInputStream object
+      FileInputStream inputStream = new FileInputStream(file);
+      //Creating a byte array
+      byte bytes[] = new byte[(int) file.length()];
+      //Reading data into the byte array
+      int numOfBytes = inputStream.read(bytes);
+      System.out.println("Data copied successfully...");
+      //Creating a FileInputStream object
+      FileOutputStream outputStream = new FileOutputStream("D:/images/output.jpg");
+      //Writing the contents of the Output Stream to a file
+      outputStream.write(bytes);
+      System.out.println("Data written successfully...");
+   }
+}
+
+
+Output
+Data copied successfully...
+Data written successfully...
+
+
+
+
+
